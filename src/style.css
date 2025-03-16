@@ -1,0 +1,320 @@
+@font-face {
+    font-family: 'Montserrat Alternates';
+    src: url('./fonts/MontserratAlternates-Regular.woff2') format('woff2'),
+        url('./fonts/MontserratAlternates-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./fonts/Montserrat-Regular.woff2') format('woff2'),
+        url('./fonts/Montserrat-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat Alternates';
+    src: url('./fonts/MontserratAlternates-Bold.woff2') format('woff2'),
+        url('./fonts/MontserratAlternates-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: Montserrat;
+}
+
+.weatherAppComplete {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.weatherTableau {
+    width: 90%;
+    height: 98%;
+    justify-content: center;
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    grid-template-columns: 1fr;
+}
+
+.titleBar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1em 2em;
+    margin: 1em 1em 0 1em;
+}
+
+.titleBar button:hover {
+    opacity: 0.8;
+}
+
+.dustbin {
+    max-width: 1.5rem;
+}
+
+.inputField {
+    min-width: 30em;
+    min-height: 5em;
+    max-height: 10em;
+    padding: 1em 2em;
+}
+
+img {
+    max-width: 3em;
+}
+
+.searchbar {
+    display: flex;
+    justify-content: center;
+}
+
+.searchIcon {
+    background-color: gray;
+}
+
+.clearInputFieldButton {
+    opacity: 1;
+    border: none;
+    background-color: gray;
+    padding: 1.3em 2em;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    cursor: pointer;
+}
+
+.submitButton {
+    opacity: 1;
+    border: none;
+    background-color: gray;
+    padding: 1.3em 2em;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    cursor: pointer;
+}
+
+
+.infoContainer {
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    gap: 0.4em;
+    margin: 1em;
+}
+
+
+
+.todayContainer {
+    display: flex;
+    justify-content: space-around;
+    padding: 1em;
+    flex-wrap: wrap;
+}
+
+.todaysWeather {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.currentWeather {
+    display: none;
+}
+
+.todaysWeatherHeader {
+    display: flex;
+    gap: 1em;
+}
+
+.dateAndLocation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.oneDayCarousel,
+.outlookInDays {
+    min-width: 400px;
+    min-height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4em;
+}
+
+.outlookInDays {
+    height: 98%;
+    padding: 2em;
+    min-width: 200px;
+    flex-direction: column;
+    margin: 1em;
+    border-radius: 1em;
+}
+
+.hourEntries,
+.dayEntries {
+    display: flex;
+    justify-content: space-evenly;
+    width: 90%;
+    height: 5em;
+}
+
+.dayEntries {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6em;
+}
+
+.hourlyPreviewElem {
+    max-width: 20px;
+    max-height: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.dailyPreviewElem {
+    border: 1px solid black;
+    border-radius: 1em;
+    padding: 1em;
+    cursor: pointer;
+    min-width: 8em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.dailyPreviewElem:hover {
+    border: 3px solid white;
+    opacity: 0.7;
+}
+
+.arrowLeft {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.arrowRight {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.dayLeft {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.dayRight {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.arrows button {
+    background-color: rgb(255, 255, 255, 0);
+    padding: 10px;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+.arrows button:hover {
+    box-shadow: 2px 2px 2px white;
+    cursor: pointer;
+}
+
+.dateOfDay {
+    display: none;
+}
+
+/* TOGGLE BUTTON  CODE */
+.toggle-checkbox {
+    display: none;
+}
+
+.slider {
+    position: relative;
+    cursor: pointer;
+}
+
+/* ellipsis */
+.slider::before {
+    background: lightblue;
+    border-radius: 34px;
+    bottom: 0;
+    content: '';
+    height: 24px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    width: 40px;
+}
+
+/* circle */
+.slider::after {
+    background: navy;
+    border-radius: 50%;
+    bottom: 0;
+    content: '';
+    height: 16px;
+    left: 4px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    transition: 0.4s;
+    width: 16px;
+}
+
+.toggle-switch {
+    margin-left: 50px;
+}
+
+.toggle-switch.opt1 {
+    color: navy;
+}
+
+.toggle-switch.opt2 {
+    color: brown;
+    display: none;
+}
+
+.toggle-checkbox:checked+.slider::before {
+    background-color: lightsalmon;
+}
+
+.toggle-checkbox:checked+.slider::after {
+    background-color: maroon;
+    transform: translateX(16px);
+}
+
+.toggle-checkbox:checked~.slider>.toggle-switch.opt1 {
+    display: none;
+}
+
+.toggle-checkbox:checked~.slider>.toggle-switch.opt2 {
+    display: inline-block;
+}

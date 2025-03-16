@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="weatherAppComplete">
+        <div class="weatherTableau">
+            <div class="titleBar">
+                <img src="./icons/title_icon.png" alt="weather app icon" class="weather_app_icon">
+                <h1>Weather App</h1>
+                <form action="" class="searchbar">
+                    <button type="button" class="clearInputFieldButton"><img src="./icons/dustbin.png" alt="search icon"
+                            class="dustbin"></button>
+                    <input type="text" class="inputField" placeholder="Enter a location">
+                    <button type="button" class="submitButton"><img src="./icons/search-24px.png" alt="search icon"
+                            class="searchIcon"></button>
+                </form>
+                <div class="toggle-checkbox-wrapper">
+                    <input class="toggle-checkbox" type="checkbox" id="toggle">
+                    <label class="slider" for="toggle">
+                        <span class="toggle-switch opt1">°F</span>
+                        <span class="toggle-switch opt2">C°</span>
+                    </label>
+                </div>
+            </div>
+            <div class="infoContainer">
+                <div class="todayContainer">
+                    <div class="todaysWeather">
+                        <div class="todaysWeatherHeader">
+                            <img alt="current Weather" class="currentWeather">
+                            <h1 class="temperatureHeader"></h1>
+                        </div>
+                        <p><span class="rainfall"></span></p>
+                        <p><span class="humidity"></span></p>
+                        <p><span class="windSpeed"></span></p>
+                    </div>
+                    <div class="dateAndLocation">
+                        <h1><span class="todaysDate"></span></h1>
+                        <p><span class="location"></span></p>
+                        <p><span class="timeNow"></span></p>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="oneDayCarousel arrows">
+                    <button class="arrowLeft"> </button>
+                    <span class="hourEntries"></span>
+                    <button class="arrowRight"> </button>
+                </div>
+            </div>
+        </div>
+        <div class="outlookInDays arrows">
+            <button class="arrowLeft dayLeft"> </button>
+            <span class="dayEntries"></span>
+            <button class="arrowRight dayRight"> </button>
+        </div>
+    </div>
+</body>
+
+</html>

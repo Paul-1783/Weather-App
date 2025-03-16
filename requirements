@@ -1,0 +1,27 @@
+1. use Visual Crossing API
+2. make it possible to search for specific location
+3. enable toggle displaying the data in Fahrenheit or Celsius
+4. change the look of the page based on the data, maybe by changing the color of the background or by adding images that describe the weather. (You could even use the Giphy API to find appropriate weather-related gifs and display them).
+
+- functions that can take a location and return the weather data for that location 
+- functions that process the JSON data you’re getting from the API and return an object with only the data you require for your app
+- Set up a form that will let users input their location and will fetch the weather info
+- display the information on your webpage
+- add any styling
+
+OPTIONAL
+- add a ‘loading’ component that displays from the time the form is submitted until the information comes back from the API
+
+
+
+  visualcrossing: 144, Mont1899golfier key: W49LDYR5GRQ8HTKZMYKJY5M8C
+
+    Giphy: 144, username: Harlekin76, PW: Montgolfier1899 key: i8X94L9VKszQTtC2e8ixGkD2tXXBOsYX
+
+https://api.giphy.com/v1/gifs/translate?api_key= i8X94L9VKszQTtC2e8ixGkD2tXXBOsYX
+
+https://api.giphy.com/v1/gifs/search?api_key=i8X94L9VKszQTtC2e8ixGkD2tXXBOsYX&q=${}&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips
+ 
+background:
+    day/night cycle
+    
