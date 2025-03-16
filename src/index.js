@@ -252,7 +252,7 @@ daysArrowRight.addEventListener("click", () => {
 function addDailyPreviewElements() {
   clearDayEntries();
 
-  let index = retrieveStoredDayIndex();
+  let index = retrieveStoredDayIndex() > -1 ? retrieveStoredDayIndex() : 0;
   let max = index + 2;
   let days = retrieveStoredDays();
   for (let i = index; i <= max; ++i) {
