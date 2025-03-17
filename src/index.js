@@ -4,67 +4,7 @@ import allThingsTimeRelated from "./time";
 import { format } from "date-fns";
 import findImg from "./picture";
 import someMath from "./math";
-
-const weatherAppComplete = document.querySelector(".weatherAppComplete");
-
-const dustbin = document.querySelector(".dustbin");
-const inputField = document.querySelector(".inputField");
-const submitButton = document.querySelector(".submitButton");
-
-const hourEntries = document.querySelector(".hourEntries");
-const hourArrowLeft = document.querySelector(".arrowLeft");
-const hourArrowRight = document.querySelector(".arrowRight");
-
-const dayEntries = document.querySelector(".dayEntries");
-const daysArrowLeft = document.querySelector(".dayLeft");
-const daysArrowRight = document.querySelector(".dayRight");
-
-const rainfall = document.querySelector(".rainfall");
-const humidity = document.querySelector(".humidity");
-const windSpeed = document.querySelector(".windSpeed");
-const todaysDate = document.querySelector(".todaysDate");
-const weatherLocation = document.querySelector(".location");
-const timeNow = document.querySelector(".timeNow");
-const currentWeather = document.querySelector(".currentWeather");
-const temperatureHeader = document.querySelector(".temperatureHeader");
-
-const toggleCheckbox = document.querySelector(".toggle-checkbox");
-
-function setBackgroundImage(currentConditions) {
-  weatherAppComplete.style.backgroundImage = `url(${findImg(
-    currentConditions,
-    "background"
-  )})`;
-}
-
-function formattedDate(dateToBeFormatted) {
-  const dates = dateToBeFormatted.split(/:|-/);
-  return format(new Date(dates[0], dates[1], dates[2]), "PPPP");
-}
-
-submitButton.addEventListener("click", () => {
-  if (inputField.value !== "") {
-    const queryString = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${inputField.value}?unitGroup=us&key=W49LDYR5GRQ8HTKZMYKJY5M8C&contentType=json&key=W49LDYR5GRQ8HTKZMYKJY5M8C`;
-    fetchData(queryString);
-  }
-});
-
-inputField.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    const queryString = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${inputField.value}?unitGroup=us&key=W49LDYR5GRQ8HTKZMYKJY5M8C&contentType=json&key=W49LDYR5GRQ8HTKZMYKJY5M8C`;
-    fetchData(queryString);
-  }
-});
-
-window.addEventListener("load", () => {
-  const queryString = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Berlin?unitGroup=us&key=W49LDYR5GRQ8HTKZMYKJY5M8C&contentType=json&key=W49LDYR5GRQ8HTKZMYKJY5M8C`;
-  fetchData(queryString);
-});
-
-dustbin.addEventListener("click", () => {
-  inputField.value = "";
-});
+import allSelectors from "./selector";
 
 function fetchData(queryString) {
   fetch(queryString, {
@@ -90,7 +30,43 @@ function fetchData(queryString) {
     });
 }
 
-toggleCheckbox.addEventListener("change", () => {
+function setBackgroundImage(currentConditions) {
+  allSelectors.weatherAppComplete.style.backgroundImage = `url(${findImg(
+    currentConditions,
+    "background"
+  )})`;
+}
+
+function formattedDate(dateToBeFormatted) {
+  const dates = dateToBeFormatted.split(/:|-/);
+  return format(new Date(dates[0], dates[1], dates[2]), "PPPP");
+}
+
+allSelectors.submitButton.addEventListener("click", () => {
+  if (allSelectors.inputField.value !== "") {
+    const queryString = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${allSelectors.inputField.value}?unitGroup=us&key=W49LDYR5GRQ8HTKZMYKJY5M8C&contentType=json&key=W49LDYR5GRQ8HTKZMYKJY5M8C`;
+    fetchData(queryString);
+  }
+});
+
+allSelectors.inputField.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    const queryString = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${allSelectors.inputField.value}?unitGroup=us&key=W49LDYR5GRQ8HTKZMYKJY5M8C&contentType=json&key=W49LDYR5GRQ8HTKZMYKJY5M8C`;
+    fetchData(queryString);
+  }
+});
+
+window.addEventListener("load", () => {
+  const queryString = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Berlin?unitGroup=us&key=W49LDYR5GRQ8HTKZMYKJY5M8C&contentType=json&key=W49LDYR5GRQ8HTKZMYKJY5M8C`;
+  fetchData(queryString);
+});
+
+allSelectors.dustbin.addEventListener("click", () => {
+  allSelectors.inputField.value = "";
+});
+
+allSelectors.toggleCheckbox.addEventListener("change", () => {
   if (allThingsTimeRelated.checkForExistenceNewDay()) {
     fillTodayContainer(allThingsTimeRelated.retrieveStoredNewDay());
   } else {
@@ -101,13 +77,13 @@ toggleCheckbox.addEventListener("change", () => {
 });
 
 function ifToggledChange(elem) {
-  return toggleCheckbox.checked
+  return allSelectors.toggleCheckbox.checked
     ? `${someMath.roundToOneDecimal(someMath.fahrenheitToCelsius(elem.temp))}°`
     : `°${someMath.roundToOneDecimal(elem.temp)}`;
 }
 
 function ifToggledChangeMin(elem) {
-  return toggleCheckbox.checked
+  return allSelectors.toggleCheckbox.checked
     ? `${someMath.roundToOneDecimal(
         someMath.fahrenheitToCelsius(elem.tempmin)
       )}°`
@@ -115,7 +91,7 @@ function ifToggledChangeMin(elem) {
 }
 
 function ifToggledChangeMax(elem) {
-  return toggleCheckbox.checked
+  return allSelectors.toggleCheckbox.checked
     ? `${someMath.roundToOneDecimal(
         someMath.fahrenheitToCelsius(elem.tempmax)
       )}°`
@@ -124,20 +100,20 @@ function ifToggledChangeMax(elem) {
 
 function fillTodayContainer(day) {
   let resolvedAddress = allThingsTimeRelated.retrieveStoredAddress();
-  currentWeather.src = findImg(day, "nope");
-  currentWeather.style.display = "inline-block";
-  rainfall.textContent = `Rainfall: ${day.precipprob}%`;
-  humidity.textContent = `Humidity: ${day.humidity}%`;
-  windSpeed.textContent = `WindSpeed: ${day.windspeed} mph`;
-  temperatureHeader.textContent = `${ifToggledChange(day)}`;
-  todaysDate.textContent = formattedDate(day.datetime);
-  weatherLocation.textContent = resolvedAddress;
-  timeNow.textContent = `Time of Day: ${allThingsTimeRelated
+  allSelectors.currentWeather.src = findImg(day, "nope");
+  allSelectors.currentWeather.style.display = "inline-block";
+  allSelectors.rainfall.textContent = `Rainfall: ${day.precipprob}%`;
+  allSelectors.humidity.textContent = `Humidity: ${day.humidity}%`;
+  allSelectors.windSpeed.textContent = `WindSpeed: ${day.windspeed} mph`;
+  allSelectors.temperatureHeader.textContent = `${ifToggledChange(day)}`;
+  allSelectors.todaysDate.textContent = formattedDate(day.datetime);
+  allSelectors.weatherLocation.textContent = resolvedAddress;
+  allSelectors.timeNow.textContent = `Time of Day: ${allThingsTimeRelated
     .retrieveLocalTime()
     .substring(0, 5)}`;
 }
 
-hourArrowLeft.addEventListener("click", () => {
+allSelectors.hourArrowLeft.addEventListener("click", () => {
   let storedHourIndex = allThingsTimeRelated.retrieveStoredHourIndex();
   if (storedHourIndex === 0) {
     allThingsTimeRelated.setStoredHourIndex(23);
@@ -147,7 +123,7 @@ hourArrowLeft.addEventListener("click", () => {
   addHourlyPreviewElements();
 });
 
-hourArrowRight.addEventListener("click", () => {
+allSelectors.hourArrowRight.addEventListener("click", () => {
   allThingsTimeRelated.setStoredHourIndex(
     allThingsTimeRelated.retrieveStoredHourIndex() + 1
   );
@@ -155,7 +131,7 @@ hourArrowRight.addEventListener("click", () => {
 });
 
 function addHourlyPreviewElements() {
-  allThingsTimeRelated.clearHourEntries(hourEntries);
+  allThingsTimeRelated.clearHourEntries(allSelectors.hourEntries);
 
   let index =
     allThingsTimeRelated.retrieveStoredHourIndex() > -1
@@ -165,7 +141,7 @@ function addHourlyPreviewElements() {
   let hours = allThingsTimeRelated.retrieveStoredHours();
   for (let i = index; i < max; ++i) {
     const newHourlyPreviewElem = buildHourlyPreviewElem(hours[i % 24]);
-    hourEntries.appendChild(newHourlyPreviewElem);
+    allSelectors.hourEntries.appendChild(newHourlyPreviewElem);
   }
 }
 
@@ -182,7 +158,7 @@ function buildHourlyPreviewElem(hour) {
   return hourlyPreviewElem;
 }
 
-daysArrowLeft.addEventListener("click", () => {
+allSelectors.daysArrowLeft.addEventListener("click", () => {
   let storedDayIndex = allThingsTimeRelated.retrieveStoredDayIndex();
   if (storedDayIndex === 0) {
     allThingsTimeRelated.setStoredDayIndex(14);
@@ -192,7 +168,7 @@ daysArrowLeft.addEventListener("click", () => {
   addDailyPreviewElements();
 });
 
-daysArrowRight.addEventListener("click", () => {
+allSelectors.daysArrowRight.addEventListener("click", () => {
   allThingsTimeRelated.setStoredDayIndex(
     allThingsTimeRelated.retrieveStoredDayIndex() + 1
   );
@@ -200,7 +176,7 @@ daysArrowRight.addEventListener("click", () => {
 });
 
 function addDailyPreviewElements() {
-  allThingsTimeRelated.clearDayEntries(dayEntries);
+  allThingsTimeRelated.clearDayEntries(allSelectors.dayEntries);
 
   let index =
     allThingsTimeRelated.retrieveStoredDayIndex() > -1
@@ -210,7 +186,7 @@ function addDailyPreviewElements() {
   let days = allThingsTimeRelated.retrieveStoredDays();
   for (let i = index; i <= max; ++i) {
     const newDailyPreviewElem = buildDailyPreviewElements(days[i % 15]);
-    dayEntries.appendChild(newDailyPreviewElem);
+    allSelectors.dayEntries.appendChild(newDailyPreviewElem);
   }
 }
 
