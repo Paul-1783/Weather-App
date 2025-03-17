@@ -1,7 +1,6 @@
 import "./style.css";
 
 import allThingsTimeRelated from "./time";
-import { format } from "date-fns";
 import findImg from "./picture";
 import someMath from "./math";
 import allSelectors from "./selector";
@@ -35,11 +34,6 @@ function setBackgroundImage(currentConditions) {
     currentConditions,
     "background"
   )})`;
-}
-
-function formattedDate(dateToBeFormatted) {
-  const dates = dateToBeFormatted.split(/:|-/);
-  return format(new Date(dates[0], dates[1], dates[2]), "PPPP");
 }
 
 allSelectors.submitButton.addEventListener("click", () => {
@@ -106,7 +100,9 @@ function fillTodayContainer(day) {
   allSelectors.humidity.textContent = `Humidity: ${day.humidity}%`;
   allSelectors.windSpeed.textContent = `WindSpeed: ${day.windspeed} mph`;
   allSelectors.temperatureHeader.textContent = `${ifToggledChange(day)}`;
-  allSelectors.todaysDate.textContent = formattedDate(day.datetime);
+  allSelectors.todaysDate.textContent = allThingsTimeRelated.formattedDate(
+    day.datetime
+  );
   allSelectors.weatherLocation.textContent = resolvedAddress;
   allSelectors.timeNow.textContent = `Time of Day: ${allThingsTimeRelated
     .retrieveLocalTime()
@@ -196,7 +192,9 @@ function buildDailyPreviewElements(day) {
   dailyPreviewElem.classList.add("dailyPreviewElem");
   dailyPreviewElem.insertAdjacentHTML(
     "beforeend",
-    `<p class="dayOfWeek">${formattedDate(day.datetime)}</p>
+    `<p class="dayOfWeek">${allThingsTimeRelated.formattedDate(
+      day.datetime
+    )}</p>
         <img class="iconOfDay" src="${imgSrc}">
       <p class="temperatureRangeOfDay">${ifToggledChangeMin(
         day

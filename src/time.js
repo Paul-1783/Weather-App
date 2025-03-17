@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 let allThingsTimeRelated = (function () {
   function saveLocalTime(localTime) {
     localStorage.setItem("pingedLocalTime", JSON.stringify(localTime));
@@ -90,7 +92,13 @@ let allThingsTimeRelated = (function () {
     dayEntries.innerHTML = "";
   }
 
+  function formattedDate(dateToBeFormatted) {
+    const dates = dateToBeFormatted.split(/:|-/);
+    return format(new Date(dates[0], dates[1], dates[2]), "PPPP");
+  }
+
   return {
+    formattedDate,
     clearDayEntries,
     clearHourEntries,
     deleteStoredHourIndex,
