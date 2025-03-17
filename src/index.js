@@ -130,6 +130,7 @@ function fetchData(queryString) {
       setBackgroundImage(result.currentConditions);
       setStoredHours(result.days[0].hours);
       setStoredDays(result.days);
+      setStoredNewDay(result.days[0]);
       setStoredAddress(result.resolvedAddress);
       saveLocalTime(result.currentConditions.datetime);
       fillTodayContainer(result.days[0]);
@@ -143,6 +144,7 @@ function fetchData(queryString) {
 
 toggleCheckbox.addEventListener("change", () => {
   if (checkForExistenceNewDay()) {
+    console.log("new Day: ", retrieveStoredNewDay());
     fillTodayContainer(retrieveStoredNewDay());
   } else {
     fillTodayContainer(retrieveStoredDays()[0]);
