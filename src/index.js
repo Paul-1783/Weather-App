@@ -144,7 +144,6 @@ function fetchData(queryString) {
 
 toggleCheckbox.addEventListener("change", () => {
   if (checkForExistenceNewDay()) {
-    console.log("new Day: ", retrieveStoredNewDay());
     fillTodayContainer(retrieveStoredNewDay());
   } else {
     fillTodayContainer(retrieveStoredDays()[0]);
